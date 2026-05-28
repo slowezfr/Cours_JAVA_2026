@@ -96,13 +96,41 @@
 <h2>Exercice 5 : Triangle isocele</h2>
 <p>Ecrire le code afin de produire un triangle rectangle aligné sur la droite</p>
 <p>Exemple si l'utilisateur saisie le valeur 5</p>
+
 <p>&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;***</br>&nbsp;****</br>*****</p>
+
+<p>
+<% for (int i = 1; i <= cpt; i++) {
+    for (int espace = 1; espace <= cpt - i; espace++) { %> <% }
+    for (int etoile = 1; etoile <= i; etoile++) { %>*<% } %>
+<% } %>
+</p>
+
+
 
 <h2>Exercice 6 : Le demi losange</h2>
 <p>Ecrire le code afin de produire un losange</p>
 <p>Exemple si l'utilisateur saisie le valeur 5</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;***</br>&nbsp;&nbsp;****</br>*****</p>
+
 <p>*****</br>&nbsp;&nbsp;****</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</p>
+
+<p>
+<% for (int i = 1; i <= cpt; i++) {
+    for (int espace = 1; espace <= cpt - i; espace++) { %>  <% }
+    for (int etoile = 1; etoile <= i; etoile++) { %>*<% } %>
+<% } %>
+
+<% for (int i = cpt; i >= 1; i--) {
+    for (int espace = 1; espace <= cpt - i; espace++) { %>  <% }
+    for (int etoile = 1; etoile <= i; etoile++) { %>*<% } %>
+<% } %>
+</p>
+
+
+
+
+
 
 <h2>Exercice 7 : La table de multiplication</h2>
 <p>Ecrire le code afin de créser une table de multiplication</p>
