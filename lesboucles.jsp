@@ -123,17 +123,27 @@ for (int i = 1; i <= cpt; i++) {
 
 <p>*****</br>&nbsp;&nbsp;****</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</p>
 
-<p>
-<% for (int i = 1; i <= cpt; i++) {
-    for (int espace = 1; espace <= cpt - i; espace++) { %>  <% }
-    for (int etoile = 1; etoile <= i; etoile++) { %>*<% } %>
-<% } %>
+<p><%
+for (int i = 1; i <= cpt; i++) {
+    for (int espace = 1; espace <= cpt - i; espace++) {
+        out.print(" ");
+    }
+    for (int etoile = 1; etoile <= i; etoile++) {
+        out.print("*");
+    }
+    out.print("\n");
+}
 
-<% for (int i = cpt; i >= 1; i--) {
-    for (int espace = 1; espace <= cpt - i; espace++) { %>  <% }
-    for (int etoile = 1; etoile <= i; etoile++) { %>*<% } %>
-<% } %>
-</p>
+for (int i = cpt - 1; i >= 1; i--) {
+    for (int espace = 1; espace <= cpt - i; espace++) {
+        out.print(" ");
+    }
+    for (int etoile = 1; etoile <= i; etoile++) {
+        out.print("*");
+    }
+    out.print("\n");
+}
+%></p>
 
 
 
