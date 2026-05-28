@@ -82,18 +82,18 @@
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;***</br>&nbsp;&nbsp;****</br>*****</p>
 
-<p><%
-for (int i = 1; i <= cpt; i++) {
-    for (int espace = 1; espace <= cpt - i; espace++) {
-        out.print("  ");
-    }
-    for (int etoile = 1; etoile <= i; etoile++) {
-        out.print("*");
-    }
-    out.print("\n");
-}
-%></p>
-
+<% for (int i = 1; i <= cpt; i++) { %>
+  <p style="margin:0; font-family:monospace">
+  <%-- espaces de remplissage --%>
+  <% for (int s = 1; s <= (cpt - i); s++) { %>
+    &nbsp;&nbsp;
+  <% } %>
+  <%-- étoiles --%>
+  <% for (int j = 1; j <= i; j++) { %>
+    <%= "*" %>
+  <% } %>
+  </p>
+<% } %>
 
 
 <h2>Exercice 5 : Triangle isocele</h2>
@@ -102,17 +102,16 @@ for (int i = 1; i <= cpt; i++) {
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;***</br>&nbsp;****</br>*****</p>
 
-<p><%
-for (int i = 1; i <= cpt; i++) {
-    for (int espace = 1; espace <= cpt - i; espace++) {
-        out.print(" ");
-    }
-    for (int etoile = 1; etoile <= i; etoile++) {
-        out.print("*");
-    }
-    out.print("\n");
-}
-%></p>
+<% for (int i = 1; i <= cpt; i++) { %>
+  <p style="margin:0; font-family:monospace">
+  <% for (int s = 1; s <= (cpt - i); s++) { %>
+    &nbsp;
+  <% } %>
+  <% for (int j = 1; j <= i; j++) { %>
+    <%= "*" %>
+  <% } %>
+  </p>
+<% } %>
 
 
 
@@ -122,30 +121,12 @@ for (int i = 1; i <= cpt; i++) {
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;***</br>&nbsp;&nbsp;****</br>*****</p>
 
 <p>*****</br>&nbsp;&nbsp;****</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</p>
-
-<p><%
-for (int i = 1; i <= cpt; i++) {
-    for (int espace = 1; espace <= cpt - i; espace++) {
-        out.print(" ");
-    }
-    for (int etoile = 1; etoile <= i; etoile++) {
-        out.print("*");
-    }
-    out.print("\n");
-}
-
-for (int i = cpt - 1; i >= 1; i--) {
-    for (int espace = 1; espace <= cpt - i; espace++) {
-        out.print(" ");
-    }
-    for (int etoile = 1; etoile <= i; etoile++) {
-        out.print("*");
-    }
-    out.print("\n");
-}
-%></p>
-
-
+<% for (int i = 1; i <= cpt; i++) { %>
+  <p style="margin:0; font-family:monospace">
+  <% for (int s = 1; s <= (cpt - i); s++) { %>&nbsp;&nbsp;<% } %>
+  <% for (int j = 1; j <= i; j++) { %><%="*"%><% } %>
+  </p>
+<% } %>
 
 
 
