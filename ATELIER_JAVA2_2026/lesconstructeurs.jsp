@@ -1,16 +1,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
 <title>Les constructeurs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
-<body bgcolor="white">
-<h1>Exercices sur les constructeurs</h1>
-
-<form action="#" method="post">
-    <p>Saisir un titre de livre : <input type="text" name="titre"></p>
-    <p>Saisir un auteur : <input type="text" name="auteur"></p>
-    <p><input type="submit" value="Creer les livres"></p>
-</form>
+<body>
+<header class="site-header">
+    <nav class="top-nav" aria-label="Navigation principale">
+        <a class="brand" href="index.html">Atelier Java 2</a>
+        <div class="nav-links">
+            <a href="lesobjets.jsp">Objets</a>
+            <a href="lesconstructeurs.jsp">Constructeurs</a>
+            <a href="lepolymorphisme.jsp">Polymorphisme</a>
+        </div>
+    </nav>
+</header>
 
 <%!
     class Livre {
@@ -103,33 +110,79 @@
     Produit produit = new Produit(-50);
 %>
 
-<h2>Demonstration de la classe Livre</h2>
-<p>Livre cree via le constructeur par defaut : <%= html(livreVide.getDescription()) %></p>
-<% if (livrePlein != null) { %>
-    <p>Livre cree via le constructeur avec parametres : <%= html(livrePlein.getDescription()) %></p>
-<% } else { %>
-    <p>Remplissez le formulaire pour tester le constructeur avec parametres.</p>
-<% } %>
+<main class="page">
+    <section class="hero compact">
+        <p class="eyebrow">Serie 02</p>
+        <h1>Les constructeurs</h1>
+        <p class="lead">Initialisation d'objets, surcharge de constructeurs, chainage avec <code>this()</code> et copie.</p>
+    </section>
 
-<h2>Exercice 1 : Le constructeur par defaut</h2>
-<p>Etudiant cree sans parametre : <%= etudiantDefaut.getDescription() %></p>
+    <section class="form-panel">
+        <h2>Tester la classe Livre</h2>
+        <form action="#" method="post" class="form-grid">
+            <div class="field">
+                <label for="titre">Titre</label>
+                <input id="titre" type="text" name="titre" placeholder="Le Petit Prince">
+            </div>
+            <div class="field">
+                <label for="auteur">Auteur</label>
+                <input id="auteur" type="text" name="auteur" placeholder="Antoine de Saint-Exupery">
+            </div>
+            <div class="form-actions field full">
+                <button class="button primary" type="submit">Creer les livres</button>
+                <a class="button secondary" href="index.html">Retour au sommaire</a>
+            </div>
+        </form>
+    </section>
 
-<h2>Exercice 2 : La surcharge de constructeurs</h2>
-<ul>
-    <li>Constructeur sans parametre : <%= etudiantDefaut.getDescription() %></li>
-    <li>Constructeur avec le nom : <%= etudiantNom.getDescription() %></li>
-    <li>Constructeur avec le nom et la note : <%= etudiantComplet.getDescription() %></li>
-</ul>
+    <section class="result-grid">
+        <article class="result-card highlight">
+            <span class="tag">Livre</span>
+            <h2>Constructeurs de base</h2>
+            <p>Constructeur par defaut : <strong><%= html(livreVide.getDescription()) %></strong></p>
+            <% if (livrePlein != null) { %>
+                <p>Constructeur avec parametres : <strong><%= html(livrePlein.getDescription()) %></strong></p>
+            <% } else { %>
+                <p>Remplissez le formulaire pour tester le constructeur avec parametres.</p>
+            <% } %>
+        </article>
 
-<h2>Exercice 3 : Chainer les constructeurs avec this()</h2>
-<p>Le constructeur sans parametre appelle <code>this("Anonyme", 10)</code> pour eviter la duplication.</p>
+        <article class="result-card">
+            <span class="tag">Exercice 1</span>
+            <h2>Constructeur par defaut</h2>
+            <p>Etudiant cree sans parametre : <strong><%= etudiantDefaut.getDescription() %></strong></p>
+        </article>
 
-<h2>Exercice 4 : Le constructeur de copie</h2>
-<p>Copie de l'etudiant Marie : <%= etudiantCopie.getDescription() %></p>
+        <article class="result-card">
+            <span class="tag">Exercice 2</span>
+            <h2>Surcharge</h2>
+            <ul>
+                <li>Sans parametre : <%= etudiantDefaut.getDescription() %></li>
+                <li>Avec le nom : <%= etudiantNom.getDescription() %></li>
+                <li>Avec le nom et la note : <%= etudiantComplet.getDescription() %></li>
+            </ul>
+        </article>
 
-<h2>Exercice 5 : Valider les parametres dans le constructeur</h2>
-<p>Produit cree avec un prix de -50 euros : le prix reel est <%= produit.getPrix() %> euro.</p>
+        <article class="result-card">
+            <span class="tag">Exercice 3</span>
+            <h2>Chainage avec this()</h2>
+            <p>Le constructeur sans parametre appelle <code>this("Anonyme", 10)</code> pour eviter la duplication.</p>
+        </article>
 
-<p><a href="index.html">Retour au sommaire</a></p>
+        <article class="result-card">
+            <span class="tag">Exercice 4</span>
+            <h2>Constructeur de copie</h2>
+            <p>Copie de l'etudiant Marie : <strong><%= etudiantCopie.getDescription() %></strong></p>
+        </article>
+
+        <article class="result-card">
+            <span class="tag">Exercice 5</span>
+            <h2>Validation du prix</h2>
+            <p>Produit cree avec un prix de -50 euros : le prix reel est <strong><%= produit.getPrix() %> euro</strong>.</p>
+        </article>
+    </section>
+
+    <a class="back-link" href="index.html">Retour au sommaire</a>
+</main>
 </body>
 </html>

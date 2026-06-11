@@ -1,16 +1,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
 <title>Le polymorphisme</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
-<body bgcolor="white">
-<h1>Exercices sur le polymorphisme</h1>
-
-<form action="#" method="post">
-    <p>Saisir le nom d'un chien : <input type="text" name="chien"></p>
-    <p>Saisir le nom d'un chat : <input type="text" name="chat"></p>
-    <p><input type="submit" value="Faire crier les animaux"></p>
-</form>
+<body>
+<header class="site-header">
+    <nav class="top-nav" aria-label="Navigation principale">
+        <a class="brand" href="index.html">Atelier Java 2</a>
+        <div class="nav-links">
+            <a href="lesobjets.jsp">Objets</a>
+            <a href="lesconstructeurs.jsp">Constructeurs</a>
+            <a href="lepolymorphisme.jsp">Polymorphisme</a>
+        </div>
+    </nav>
+</header>
 
 <%!
     interface Affichable {
@@ -167,42 +174,82 @@
     };
 %>
 
-<h2>Demonstration du polymorphisme</h2>
-<p>Le tableau est declare <code>Animal[]</code>, mais chaque objet execute sa propre version de
-<code>crier()</code>.</p>
-<ul>
-    <% for (Animal animal : animaux) { %>
-        <li>
-            <%= html(animal.toString()) %> dit : <%= html(animal.crier()) %>
-            - <%= typeAnimal(animal) %>
-        </li>
-    <% } %>
-</ul>
+<main class="page">
+    <section class="hero compact">
+        <p class="eyebrow">Serie 03</p>
+        <h1>Le polymorphisme</h1>
+        <p class="lead">Une meme reference <code>Animal</code> peut appeler des comportements differents selon l'objet reel.</p>
+    </section>
 
-<h2>Exercice 1 : Redefinir toString()</h2>
-<p>Chaque classe retourne une description adaptee avec <code>toString()</code>, par exemple
-<code><%= html(animaux[0].toString()) %></code>.</p>
+    <section class="form-panel">
+        <h2>Tester les animaux</h2>
+        <form action="#" method="post" class="form-grid">
+            <div class="field">
+                <label for="chien">Nom du chien</label>
+                <input id="chien" type="text" name="chien" placeholder="Rex">
+            </div>
+            <div class="field">
+                <label for="chat">Nom du chat</label>
+                <input id="chat" type="text" name="chat" placeholder="Felix">
+            </div>
+            <div class="form-actions field full">
+                <button class="button primary" type="submit">Faire crier les animaux</button>
+                <a class="button secondary" href="index.html">Retour au sommaire</a>
+            </div>
+        </form>
+    </section>
 
-<h2>Exercice 2 : La classe abstraite Forme</h2>
-<ul>
-    <li>Aire du cercle de rayon 3 : <%= formes[0].aire() %></li>
-    <li>Aire du carre de cote 4 : <%= formes[1].aire() %></li>
-</ul>
+    <section class="result-grid">
+        <article class="result-card highlight">
+            <span class="tag">Demo</span>
+            <h2>Tableau Animal[]</h2>
+            <p>La boucle reste la meme, mais chaque classe execute sa propre version de <code>crier()</code>.</p>
+            <ul>
+                <% for (Animal animal : animaux) { %>
+                    <li><%= html(animal.toString()) %> dit : <%= html(animal.crier()) %> - <%= typeAnimal(animal) %></li>
+                <% } %>
+            </ul>
+        </article>
 
-<h2>Exercice 3 : L'interface Affichable</h2>
-<ul>
-    <% for (Affichable affichable : affichables) { %>
-        <li><%= html(affichable.afficher()) %></li>
-    <% } %>
-</ul>
+        <article class="result-card">
+            <span class="tag">Exercice 1</span>
+            <h2>Redefinir toString()</h2>
+            <p>Chaque classe retourne une description adaptee, par exemple <code><%= html(animaux[0].toString()) %></code>.</p>
+        </article>
 
-<h2>Exercice 4 : Ajouter un Oiseau</h2>
-<p>La classe <code>Oiseau</code> herite de <code>Animal</code> et redefinit <code>crier()</code>.
-Elle est ajoutee dans le tableau sans changer la boucle d'affichage.</p>
+        <article class="result-card">
+            <span class="tag">Exercice 2</span>
+            <h2>Classe abstraite Forme</h2>
+            <ul>
+                <li>Aire du cercle de rayon 3 : <%= formes[0].aire() %></li>
+                <li>Aire du carre de cote 4 : <%= formes[1].aire() %></li>
+            </ul>
+        </article>
 
-<h2>Exercice 5 : L'operateur instanceof</h2>
-<p>La boucle affiche un message specifique pour les chiens, les chats et les autres animaux.</p>
+        <article class="result-card">
+            <span class="tag">Exercice 3</span>
+            <h2>Interface Affichable</h2>
+            <ul>
+                <% for (Affichable affichable : affichables) { %>
+                    <li><%= html(affichable.afficher()) %></li>
+                <% } %>
+            </ul>
+        </article>
 
-<p><a href="index.html">Retour au sommaire</a></p>
+        <article class="result-card">
+            <span class="tag">Exercice 4</span>
+            <h2>Ajouter un Oiseau</h2>
+            <p><code>Oiseau</code> herite de <code>Animal</code>, redefinit <code>crier()</code> et rejoint le tableau sans changer la boucle.</p>
+        </article>
+
+        <article class="result-card">
+            <span class="tag">Exercice 5</span>
+            <h2>instanceof</h2>
+            <p>La boucle distingue les chiens, les chats et les autres animaux avec l'operateur <code>instanceof</code>.</p>
+        </article>
+    </section>
+
+    <a class="back-link" href="index.html">Retour au sommaire</a>
+</main>
 </body>
 </html>

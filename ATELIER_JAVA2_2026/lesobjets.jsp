@@ -1,16 +1,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
 <title>Les objets</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
-<body bgcolor="white">
-<h1>Exercices sur les objets</h1>
-
-<form action="#" method="post">
-    <p>Saisir un nom : <input type="text" name="nom"></p>
-    <p>Saisir un age : <input type="text" name="age"></p>
-    <p><input type="submit" value="Creer la personne"></p>
-</form>
+<body>
+<header class="site-header">
+    <nav class="top-nav" aria-label="Navigation principale">
+        <a class="brand" href="index.html">Atelier Java 2</a>
+        <div class="nav-links">
+            <a href="lesobjets.jsp">Objets</a>
+            <a href="lesconstructeurs.jsp">Constructeurs</a>
+            <a href="lepolymorphisme.jsp">Polymorphisme</a>
+        </div>
+    </nav>
+</header>
 
 <%!
     class Personne {
@@ -131,32 +138,80 @@
     compte.retirer(30);
 %>
 
-<% if (p != null) { %>
-    <h2>Objet Personne cree avec encapsulation</h2>
-    <p>Nom : <%= html(p.getNom()) %></p>
-    <p>Age : <%= p.getAge() %> ans</p>
-    <p><%= html(p.seDecrire()) %></p>
-<% } %>
+<main class="page">
+    <section class="hero compact">
+        <p class="eyebrow">Serie 01</p>
+        <h1>Les objets</h1>
+        <p class="lead">Creation de classes, instanciation, methodes, encapsulation et manipulation d'objets simples.</p>
+    </section>
 
-<h2>Exercice 1 : La classe Voiture</h2>
-<p>Voiture instanciee : <%= voiture.getDescription() %></p>
+    <section class="form-panel">
+        <h2>Tester la classe Personne</h2>
+        <form action="#" method="post" class="form-grid">
+            <div class="field">
+                <label for="nom">Nom</label>
+                <input id="nom" type="text" name="nom" placeholder="Marie">
+            </div>
+            <div class="field">
+                <label for="age">Age</label>
+                <input id="age" type="number" name="age" placeholder="25">
+            </div>
+            <div class="form-actions field full">
+                <button class="button primary" type="submit">Creer la personne</button>
+                <a class="button secondary" href="index.html">Retour au sommaire</a>
+            </div>
+        </form>
+    </section>
 
-<h2>Exercice 2 : Ajouter une methode a la classe Personne</h2>
-<p>La methode <code>seDecrire()</code> retourne une phrase complete a partir du nom et de l'age.</p>
-<% if (p == null) { %>
-    <p>Remplissez le formulaire pour creer une personne et afficher le resultat.</p>
-<% } %>
+    <section class="result-grid">
+        <% if (p != null) { %>
+            <article class="result-card highlight">
+                <span class="tag">Personne</span>
+                <h2>Objet cree avec encapsulation</h2>
+                <p>Nom : <strong><%= html(p.getNom()) %></strong></p>
+                <p>Age : <strong><%= p.getAge() %> ans</strong></p>
+                <p><%= html(p.seDecrire()) %></p>
+            </article>
+        <% } else { %>
+            <article class="result-card highlight">
+                <span class="tag">Personne</span>
+                <h2>Objet a tester</h2>
+                <p>Remplissez le formulaire pour afficher la description generee par <code>seDecrire()</code>.</p>
+            </article>
+        <% } %>
 
-<h2>Exercice 3 : La classe Rectangle</h2>
-<p>Surface d'un rectangle de 5 par 3 : <%= rectangle.calculerSurface() %></p>
+        <article class="result-card">
+            <span class="tag">Exercice 1</span>
+            <h2>Classe Voiture</h2>
+            <p>Voiture instanciee : <strong><%= voiture.getDescription() %></strong></p>
+        </article>
 
-<h2>Exercice 4 : Le compte bancaire</h2>
-<p>Apres un depot de 100 euros puis un retrait de 30 euros, le solde final est de <%= compte.getSolde() %> euros.</p>
+        <article class="result-card">
+            <span class="tag">Exercice 2</span>
+            <h2>Methode seDecrire()</h2>
+            <p>La classe <code>Personne</code> possede une methode qui retourne une phrase complete.</p>
+        </article>
 
-<h2>Exercice 5 : L'encapsulation</h2>
-<p>Les attributs de <code>Personne</code> sont prives et le code utilise <code>getNom()</code>,
-<code>setNom(...)</code>, <code>getAge()</code> et <code>setAge(...)</code>.</p>
+        <article class="result-card">
+            <span class="tag">Exercice 3</span>
+            <h2>Classe Rectangle</h2>
+            <p>Surface d'un rectangle de 5 par 3 : <strong><%= rectangle.calculerSurface() %></strong></p>
+        </article>
 
-<p><a href="index.html">Retour au sommaire</a></p>
+        <article class="result-card">
+            <span class="tag">Exercice 4</span>
+            <h2>Compte bancaire</h2>
+            <p>Apres un depot de 100 euros puis un retrait de 30 euros, le solde final est de <strong><%= compte.getSolde() %> euros</strong>.</p>
+        </article>
+
+        <article class="result-card">
+            <span class="tag">Exercice 5</span>
+            <h2>Encapsulation</h2>
+            <p>Les attributs sont prives et le code utilise les getters et setters pour lire ou modifier l'objet.</p>
+        </article>
+    </section>
+
+    <a class="back-link" href="index.html">Retour au sommaire</a>
+</main>
 </body>
 </html>

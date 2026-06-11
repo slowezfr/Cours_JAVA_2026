@@ -3,27 +3,62 @@
 <head>
     <title>Atelier Java 2</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body bgcolor="white">
+<body>
+<header class="site-header">
+    <nav class="top-nav" aria-label="Navigation principale">
+        <a class="brand" href="index.html">Atelier Java 2</a>
+        <div class="nav-links">
+            <a href="lesobjets.jsp">Objets</a>
+            <a href="lesconstructeurs.jsp">Constructeurs</a>
+            <a href="lepolymorphisme.jsp">Polymorphisme</a>
+        </div>
+    </nav>
+</header>
 
-<table border="0">
-<tr>
-<td></td>
-<td>
-<h1>Exercices de programmation orientee objet en JSP (Java)</h1>
-<p>Ceci est la page d'exercices Java 2 : Theo</p>
-<p>Cette serie presente les bases de la programmation orientee objet : les objets,
-les constructeurs et le polymorphisme.</p>
-</td>
-</tr>
-</table>
+<main class="page">
+    <section class="hero">
+        <p class="eyebrow">Programmation orientee objet</p>
+        <h1>Exercices Java en JSP</h1>
+        <p class="hero-text">
+            Les objets, les constructeurs et le polymorphisme presentes dans une mini-application claire,
+            lisible et prete pour Tomcat.
+        </p>
+        <div class="hero-actions">
+            <a class="button primary" href="lesobjets.jsp">Commencer les exercices</a>
+            <a class="button secondary" href="../index.html">Retour au cours Java</a>
+        </div>
+    </section>
 
-<h2>Liste des exercices realises</h2>
-<ol>
-    <li>Serie d'exercices sur les objets : <a href="lesobjets.jsp">Les objets</a></li>
-    <li>Serie d'exercices sur les constructeurs : <a href="lesconstructeurs.jsp">Les constructeurs</a></li>
-    <li>Serie d'exercices sur le polymorphisme : <a href="lepolymorphisme.jsp">Le polymorphisme</a></li>
-</ol>
+    <section class="section-heading">
+        <p class="eyebrow">Sommaire</p>
+        <h2>Exercices realises</h2>
+    </section>
 
+    <section class="exercise-grid" aria-label="Liste des exercices">
+        <article class="exercise-card accent-green">
+            <span class="tag">01</span>
+            <h3>Les objets</h3>
+            <p>Classes, attributs, methodes, objet <code>Personne</code>, rectangle, voiture et compte bancaire.</p>
+            <a class="card-link" href="lesobjets.jsp">Ouvrir la page</a>
+        </article>
+
+        <article class="exercise-card accent-gold">
+            <span class="tag">02</span>
+            <h3>Les constructeurs</h3>
+            <p>Constructeur par defaut, surcharge, chainage avec <code>this()</code> et constructeur de copie.</p>
+            <a class="card-link" href="lesconstructeurs.jsp">Ouvrir la page</a>
+        </article>
+
+        <article class="exercise-card accent-blue">
+            <span class="tag">03</span>
+            <h3>Le polymorphisme</h3>
+            <p>Heritage, redefinition, classe abstraite, interface, nouvel animal et <code>instanceof</code>.</p>
+            <a class="card-link" href="lepolymorphisme.jsp">Ouvrir la page</a>
+        </article>
+    </section>
+</main>
 </body>
 </html>
