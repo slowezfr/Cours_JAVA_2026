@@ -1,67 +1,146 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-
-<html>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Connexion à MariaDB via JSP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion MariaDB</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Exemple de connexion à MariaDB avec JSP</h1>
-    <% 
-    String url = "jdbc:mariadb://localhost:3306/films";
-    String user = "cnam";
-    String password = "cnam";
+<header class="site-header">
+    <nav class="top-nav" aria-label="Navigation principale">
+        <a class="brand" href="index.html">Cours Java 2026</a>
+        <div class="nav-links">
+            <a href="lesboucles.jsp">Boucles</a>
+            <a href="lesconditions.jsp">Conditions</a>
+            <a href="leschaines.jsp">Chaines</a>
+            <a href="lestableaux.jsp">Tableaux</a>
+        </div>
+    </nav>
+</header>
 
-        // Charger le pilote JDBC (pilote disponible dans WEB-INF/lib)
+<%
+    List<String[]> films = new ArrayList<String[]>();
+    String erreur = null;
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    try {
+        String url = "jdbc:mariadb://localhost:3306/films";
+        String user = "cnam";
+        String password = "cnam";
+
         Class.forName("org.mariadb.jdbc.Driver");
-
-        // Établir la connexion
-        Connection conn = DriverManager.getConnection(url, user, password);
-        // Exemple de requête SQL
+        conn = DriverManager.getConnection(url, user, password);
         String sql = "SELECT idFilm, titre, annee FROM Film WHERE annee >= 2000";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        ResultSet rs = pstmt.executeQuery();
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
 
-        // Afficher les résultats (à adapter selon vos besoins)
         while (rs.next()) {
-            String colonne1 = rs.getString("idFilm");
-            String colonne2 = rs.getString("titre");
-            String colonne3 = rs.getString("annee");
-            // Faites ce que vous voulez avec les données...
-            //Exemple d'affichage de 2 colonnes
-            out.println("id : " + colonne1 + ", titre : " + colonne2 + ", année : " + colonne3 + "</br>");
+            films.add(new String[] {
+                    rs.getString("idFilm"),
+                    rs.getString("titre"),
+                    rs.getString("annee")
+            });
         }
+    } catch (Exception exception) {
+        erreur = exception.getMessage();
+    } finally {
+        if (rs != null) {
+            try { rs.close(); } catch (SQLException ignore) {}
+        }
+        if (pstmt != null) {
+            try { pstmt.close(); } catch (SQLException ignore) {}
+        }
+        if (conn != null) {
+            try { conn.close(); } catch (SQLException ignore) {}
+        }
+    }
+%>
 
-        // Fermer les ressources 
-        rs.close();
-        pstmt.close();
-        conn.close();
-    %>
+<main class="page">
+    <section class="hero compact">
+        <p class="eyebrow">Base de donnees</p>
+        <h1>Connexion a MariaDB avec JSP</h1>
+        <p class="lead">Exemple de lecture d'une table de films et liste des exercices lies a la base de donnees.</p>
+    </section>
 
-<h2>Exercice 1 : Les films entre 2000 et 2015</h2>
-<p>Extraire les films dont l'année est supérieur à l'année 2000 et inférieur à 2015.</p>
+    <section class="panel">
+        <h2>Films depuis MariaDB</h2>
+        <% if (erreur != null) { %>
+            <p class="notice">La connexion MariaDB n'est pas disponible pour le moment : <%= erreur %></p>
+        <% } else if (films.isEmpty()) { %>
+            <p class="notice">Aucun film trouve avec la requete actuelle.</p>
+        <% } else { %>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Titre</th>
+                        <th>Annee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (int i = 0; i < films.size(); i++) {
+                        String[] film = films.get(i);
+                    %>
+                        <tr>
+                            <td><%= film[0] %></td>
+                            <td><%= film[1] %></td>
+                            <td><%= film[2] %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        <% } %>
+    </section>
 
-<h2>Exercice 2 : Année de recherche</h2>
-<p>Créer un champ de saisie permettant à l'utilisateur de choisir l'année de sa recherche.</p>
+    <section class="section-heading">
+        <p class="eyebrow">Travail demande</p>
+        <h2>Exercices base de donnees</h2>
+    </section>
 
-<h2>Exercice 3 : Modification du titre du film</h2>
-<p>Créer un fichier permettant de modifier le titre d'un film sur la base de son ID (ID choisi par l'utilisateur)</p>
+    <section class="result-grid">
+        <article class="result-card">
+            <span class="tag">Exercice 1</span>
+            <h2>Films entre 2000 et 2015</h2>
+            <p>Extraire les films dont l'annee est superieure a 2000 et inferieure a 2015.</p>
+        </article>
 
-<h2>Exercice 4 : La valeur maximum</h2>
-<p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
-<hr>
-<h3>Projet Bibliothèque</h3>
-<p>Votre projet consiste à concevoir et développer une application de gestion de bibliothèque moderne qui simplifie le processus de prêt et de retour de livres. Les fonctionnalités attendues dans le cadre de ce projet sont les suivantes :
-<ul>
-<li>L’enregistrement et la suppression de livres.</li>
-<li>La recherche de livres disponibles.</li>
-<li>L'emprunt possible d'un livre par un utilisateur.</li>
-<li>La gestion des utilisateurs.</li>
-<li>La gestion des stocks.</li>
-</ul>
-Votre travail est de créer votre code afin de répondre aux besoins définis ci-dessus. L'application exploitera le language JSP (JAVA) pour interagir avec la base de données MariaDB.
-L’application pourra être enrichie avec des fonctionnalités supplémentaires telles que des recommandations de livres, des notifications pour les retours en retard, ou encore des rapports statistiques sur l'utilisation des livres pour améliorer l'expérience utilisateur et la gestion de la bibliothèque.
-</p>
+        <article class="result-card">
+            <span class="tag">Exercice 2</span>
+            <h2>Annee de recherche</h2>
+            <p>Creer un champ permettant a l'utilisateur de choisir l'annee de sa recherche.</p>
+        </article>
+
+        <article class="result-card">
+            <span class="tag">Exercice 3</span>
+            <h2>Modifier un titre</h2>
+            <p>Creer une page permettant de modifier le titre d'un film selon son ID.</p>
+        </article>
+
+        <article class="result-card">
+            <span class="tag">Exercice 4</span>
+            <h2>Ajouter un film</h2>
+            <p>Creer un formulaire pour saisir un nouveau film dans la base de donnees.</p>
+        </article>
+    </section>
+
+    <section class="panel">
+        <p class="eyebrow">Projet</p>
+        <h2>Bibliotheque</h2>
+        <p class="notice">
+            Concevoir une application de gestion de bibliotheque : enregistrer et supprimer des livres,
+            rechercher les livres disponibles, gerer les emprunts, les utilisateurs et les stocks.
+        </p>
+    </section>
+
+    <a class="back-link" href="index.html">Retour au sommaire</a>
+</main>
 </body>
 </html>

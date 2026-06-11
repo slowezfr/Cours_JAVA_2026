@@ -1,48 +1,119 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-<title>les conditions</title>
+<title>Les conditions</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
-<body bgcolor=white>
-<h1>Exercices sur les conditions</h1>
-<form action="#" method="post">
-    <p>Saisir la valeur 1 : <input type="text" id="inputValeur" name="valeur1">
-    <p>Saisir la valeur 2 : <input type="text" id="inputValeur" name="valeur2">
-    <p><input type="submit" value="Afficher">
-</form>
-<%-- Récupération des valeurs --%>
-    <% String valeur1 = request.getParameter("valeur1"); %>
-    <% String valeur2 = request.getParameter("valeur2"); %>
+<body>
+<header class="site-header">
+    <nav class="top-nav" aria-label="Navigation principale">
+        <a class="brand" href="index.html">Cours Java 2026</a>
+        <div class="nav-links">
+            <a href="lesboucles.jsp">Boucles</a>
+            <a href="lesconditions.jsp">Conditions</a>
+            <a href="leschaines.jsp">Chaines</a>
+            <a href="lestableaux.jsp">Tableaux</a>
+        </div>
+    </nav>
+</header>
 
-    <%-- Vérification de la condition entre les deux valeurs --%>
-    <% if (valeur1 != null && valeur2 != null) { %>
-        <%-- Conversion des valeurs en entiers pour la comparaison --%>
-        <% int intValeur1 = Integer.parseInt(valeur1); %>
-        <% int intValeur2 = Integer.parseInt(valeur2); %>
-        
-        <%-- Condition if pour comparer les valeurs --%>
-        <% if (intValeur1 > intValeur2) { %>
-            <p>Valeur 1 est supérieure à Valeur 2.</p>
-        <% } else if (intValeur1 < intValeur2) { %>
-            <p>Valeur 1 est inférieure à Valeur 2.</p>
-        <% } else { %>
-            <p>Valeur 1 est égale à Valeur 2.</p>
-        <% } %>
-   
-    
-<h2>Exercice 1 : Comparaison 1</h2>
-<p>Ecrire un programme qui demande à l'utilisateur de saisir 3 valeurs (des chiffres),</br>
-A, B et C et dites nous si la valeur de C est comprise entre A et B.</br>
-Exemple :</br>
-A = 10</br>
-B = 20</br>
-C = 15</br>
-Oui C est compris entre A et B</p>
+<%!
+    private int parseEntier(String valeur, int defaut) {
+        try {
+            return Integer.parseInt(valeur);
+        } catch (Exception exception) {
+            return defaut;
+        }
+    }
+%>
 
-<h2>Exercice 2 : Pair ou Impair ?</h2>
-<p>Écrivez un programme pour vérifier si un nombre est pair ou impair en utilisant une structure if</p>
+<%
+    String valeur1 = request.getParameter("valeur1");
+    String valeur2 = request.getParameter("valeur2");
+    String valeur3 = request.getParameter("valeur3");
 
-<% } %>
-<p><a href="index.html">Retour au sommaire</a></p>
+    int a = parseEntier(valeur1, 10);
+    int b = parseEntier(valeur2, 20);
+    int c = parseEntier(valeur3, 15);
+
+    String comparaison;
+    if (a > b) {
+        comparaison = "A est superieur a B.";
+    } else if (a < b) {
+        comparaison = "A est inferieur a B.";
+    } else {
+        comparaison = "A est egal a B.";
+    }
+
+    int minimum = Math.min(a, b);
+    int maximum = Math.max(a, b);
+    boolean cEntreAEtB = c >= minimum && c <= maximum;
+    boolean cPair = c % 2 == 0;
+%>
+
+<main class="page">
+    <section class="hero compact">
+        <p class="eyebrow">Exercice 02</p>
+        <h1>Les conditions</h1>
+        <p class="lead">Comparer des valeurs avec <code>if</code>, <code>else if</code> et <code>else</code>.</p>
+    </section>
+
+    <section class="form-panel">
+        <h2>Saisir trois valeurs</h2>
+        <form action="#" method="post" class="form-grid">
+            <div class="field">
+                <label for="valeur1">A</label>
+                <input type="number" id="valeur1" name="valeur1" value="<%= a %>">
+            </div>
+            <div class="field">
+                <label for="valeur2">B</label>
+                <input type="number" id="valeur2" name="valeur2" value="<%= b %>">
+            </div>
+            <div class="field">
+                <label for="valeur3">C</label>
+                <input type="number" id="valeur3" name="valeur3" value="<%= c %>">
+            </div>
+            <div class="form-actions field full">
+                <button class="button primary" type="submit">Afficher</button>
+                <a class="button secondary" href="index.html">Retour au sommaire</a>
+            </div>
+        </form>
+    </section>
+
+    <section class="result-grid three">
+        <article class="result-card highlight">
+            <span class="tag">Demo</span>
+            <h2>Comparaison de A et B</h2>
+            <p>A = <strong><%= a %></strong>, B = <strong><%= b %></strong></p>
+            <p><%= comparaison %></p>
+        </article>
+
+        <article class="result-card">
+            <span class="tag">Exercice 1</span>
+            <h2>C entre A et B</h2>
+            <p>C = <strong><%= c %></strong></p>
+            <% if (cEntreAEtB) { %>
+                <p>Oui, C est compris entre A et B.</p>
+            <% } else { %>
+                <p>Non, C n'est pas compris entre A et B.</p>
+            <% } %>
+        </article>
+
+        <article class="result-card">
+            <span class="tag">Exercice 2</span>
+            <h2>Pair ou impair</h2>
+            <% if (cPair) { %>
+                <p>La valeur C est paire.</p>
+            <% } else { %>
+                <p>La valeur C est impaire.</p>
+            <% } %>
+        </article>
+    </section>
+
+    <a class="back-link" href="index.html">Retour au sommaire</a>
+</main>
 </body>
 </html>

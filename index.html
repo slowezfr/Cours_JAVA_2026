@@ -1,30 +1,114 @@
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-<title>Java</title>
-<meta charset="UTF-8">  
+    <title>Cours Java 2026</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body bgcolor=white>
+<body>
+<header class="site-header">
+    <nav class="top-nav" aria-label="Navigation principale">
+        <a class="brand" href="index.html">Cours Java 2026</a>
+        <div class="nav-links">
+            <a href="lesboucles.jsp">Boucles</a>
+            <a href="lesconditions.jsp">Conditions</a>
+            <a href="leschaines.jsp">Chaines</a>
+            <a href="lestableaux.jsp">Tableaux</a>
+        </div>
+    </nav>
+</header>
 
-<table border="0">
-<tr>
-<td>
-</td>
-<td>
-<h1>Exercices de programmation en JSP (Java)</h1>
-<p>Ceci est votre page d'exercices Java : Nom Prénom
-</td>
-</tr>
-</table>
-<h2>Liste de vos exercices</h2>
-<p>
-<ol>
-<li>Série d'exercices sur les boucles : <a href="lesboucles.jsp"> Les boucles</a>
-<li>Série d'exercices sur les conditions : <a href="lesconditions.jsp"> Les conditions</a>
-<li>Série d'exercices sur les chaines de caractères : <a href="leschaines.jsp"> Les String</a>
-<li>Série d'exercices sur les tableaux : <a href="lestableaux.jsp"> Les tableaux</a>
-<li>Atelier Java 2 - programmation orientée objet : <a href="ATELIER_JAVA2_2026/index.html"> Objets, constructeurs et polymorphisme</a>
-</ol>
+<main class="page">
+    <section class="hero">
+        <p class="eyebrow">JSP et Java</p>
+        <h1>Exercices de programmation</h1>
+        <p class="hero-text">
+            Une page d'accueil plus claire pour retrouver les exercices sur les boucles, les conditions,
+            les chaines de caracteres, les tableaux et les pages annexes du cours.
+        </p>
+        <div class="hero-actions">
+            <a class="button primary" href="lesboucles.jsp">Commencer</a>
+            <a class="button secondary" href="ATELIER_JAVA2_2026/index.html">Atelier Java 2</a>
+        </div>
+    </section>
 
+    <section class="section-heading">
+        <p class="eyebrow">Exercices principaux</p>
+        <h2>Les bases Java</h2>
+    </section>
+
+    <section class="exercise-grid" aria-label="Exercices principaux">
+        <article class="exercise-card accent-green">
+            <span class="tag">01</span>
+            <h3>Les boucles</h3>
+            <p>Generation de formes avec des etoiles, triangles, demi-losange et table de multiplication.</p>
+            <a class="card-link" href="lesboucles.jsp">Ouvrir</a>
+        </article>
+
+        <article class="exercise-card accent-gold">
+            <span class="tag">02</span>
+            <h3>Les conditions</h3>
+            <p>Comparaisons, valeur comprise entre deux bornes, verification pair ou impair.</p>
+            <a class="card-link" href="lesconditions.jsp">Ouvrir</a>
+        </article>
+
+        <article class="exercise-card accent-blue">
+            <span class="tag">03</span>
+            <h3>Les chaines</h3>
+            <p>Longueur, extraction, recherche, affichage vertical, inversion, voyelles et consonnes.</p>
+            <a class="card-link" href="leschaines.jsp">Ouvrir</a>
+        </article>
+
+        <article class="exercise-card accent-red">
+            <span class="tag">04</span>
+            <h3>Les tableaux</h3>
+            <p>Valeurs separees par des espaces, sommes, maximum, minimum et valeur proche de zero.</p>
+            <a class="card-link" href="lestableaux.jsp">Ouvrir</a>
+        </article>
+    </section>
+
+    <section class="section-heading">
+        <p class="eyebrow">Pages annexes</p>
+        <h2>Autres travaux du depot</h2>
+    </section>
+
+    <section class="exercise-grid secondary-grid" aria-label="Autres pages">
+        <article class="exercise-card">
+            <span class="tag">A</span>
+            <h3>Taches simple</h3>
+            <p>Petite page JSP avec creation d'un objet representant une tache.</p>
+            <a class="card-link" href="taches.jsp">Ouvrir</a>
+        </article>
+
+        <article class="exercise-card">
+            <span class="tag">B</span>
+            <h3>Base de donnees</h3>
+            <p>Page d'exemple MariaDB avec exercices et projet bibliotheque.</p>
+            <a class="card-link" href="Select_BDD.jsp">Ouvrir</a>
+        </article>
+    </section>
+
+    <section class="section-heading">
+        <p class="eyebrow">Deja finalises</p>
+        <h2>Projets gardes tels quels</h2>
+    </section>
+
+    <section class="exercise-grid secondary-grid" aria-label="Projets finalises">
+        <article class="exercise-card">
+            <span class="tag">POO</span>
+            <h3>Atelier Java 2</h3>
+            <p>Objets, constructeurs et polymorphisme. Cette partie est deja propre et conservee.</p>
+            <a class="card-link" href="ATELIER_JAVA2_2026/index.html">Ouvrir</a>
+        </article>
+
+        <article class="exercise-card">
+            <span class="tag">App</span>
+            <h3>Mini gestionnaire de taches</h3>
+            <p>Application JSP/Servlet separee dans son dossier, conservee sans modification.</p>
+            <a class="card-link" href="Mini-Gestionnaire-de-Taches-Collaboratif/src/main/webapp/index.jsp">Ouvrir</a>
+        </article>
+    </section>
+</main>
 </body>
 </html>
-

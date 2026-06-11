@@ -1,146 +1,153 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-<title>Boucles</title>
+<title>Les boucles</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
-<body bgcolor=white>
-<h1>Exercices sur les boucles</h1>
-<form action="#" method="post">
-    <label for="inputValeur">Saisir le nombre d'étoiles : </label>
-    <input type="text" id="inputValeur" name="valeur">
-    <input type="submit" value="Afficher">
-</form>
+<body>
+<header class="site-header">
+    <nav class="top-nav" aria-label="Navigation principale">
+        <a class="brand" href="index.html">Cours Java 2026</a>
+        <div class="nav-links">
+            <a href="lesboucles.jsp">Boucles</a>
+            <a href="lesconditions.jsp">Conditions</a>
+            <a href="leschaines.jsp">Chaines</a>
+            <a href="lestableaux.jsp">Tableaux</a>
+        </div>
+    </nav>
+</header>
 
-<%-- Récupération de la valeur saisie par l'utilisateur --%>
-<% String valeur = request.getParameter("valeur"); %>
-    
-<%-- Vérification de l'existence de la valeur --%>
-<% if (valeur != null && !valeur.isEmpty()) { %>
+<%!
+    private int parseEntier(String valeur, int defaut) {
+        try {
+            return Integer.parseInt(valeur);
+        } catch (Exception exception) {
+            return defaut;
+        }
+    }
 
-<%-- Boucle for pour afficher une ligne d'étoiles --%>
-    <%int cpt = Integer.parseInt(valeur); %>
-    <p>
-    <% for (int i = 1; i <= cpt; i++) { %>
-       <%= "*" %>
-    <% } %>
-    </p>
+    private String repeter(String texte, int nombre) {
+        StringBuilder resultat = new StringBuilder();
+        for (int i = 0; i < nombre; i++) {
+            resultat.append(texte);
+        }
+        return resultat.toString();
+    }
+%>
 
-<h2>Exercice 1 : Le carré d'étoiles</h2>
-<p>Ecrire le code afin de produire un carré d'étoile</p>
-<p>Exemple si l'utilisateur saisie le valeur 5</p>
+<%
+    String valeur = request.getParameter("valeur");
+    int cpt = parseEntier(valeur, 5);
+    if (cpt < 1) {
+        cpt = 1;
+    }
+    if (cpt > 20) {
+        cpt = 20;
+    }
 
-<p>*****</br>*****</br>*****</br>*****</br>*****</p>
+    StringBuilder ligne = new StringBuilder();
+    StringBuilder carre = new StringBuilder();
+    StringBuilder triangleGauche = new StringBuilder();
+    StringBuilder triangleInverse = new StringBuilder();
+    StringBuilder triangleDroite = new StringBuilder();
+    StringBuilder triangleIsocele = new StringBuilder();
+    StringBuilder demiLosange = new StringBuilder();
+    StringBuilder table = new StringBuilder();
 
-<p>
-<% for (int i = 1; i <= cpt; i++) { %>
-    <% for (int j = 1; j <= cpt; j++) { %>
-        <%= "*" %>
-    <% } %>
-    <br>
-<% } %>
-</p>
+    for (int i = 1; i <= cpt; i++) {
+        ligne.append("*");
+    }
 
+    for (int i = 1; i <= cpt; i++) {
+        carre.append(repeter("*", cpt)).append("\n");
+        triangleGauche.append(repeter("*", i)).append("\n");
+        triangleInverse.append(repeter("*", cpt - i + 1)).append("\n");
+        triangleDroite.append(repeter(" ", cpt - i)).append(repeter("*", i)).append("\n");
+        triangleIsocele.append(repeter(" ", cpt - i)).append(repeter("*", (i * 2) - 1)).append("\n");
+        demiLosange.append(repeter("*", i)).append("\n");
+        table.append(cpt).append(" x ").append(i).append(" = ").append(cpt * i).append("\n");
+    }
 
+    for (int i = cpt - 1; i >= 1; i--) {
+        demiLosange.append(repeter("*", i)).append("\n");
+    }
+%>
 
-<h2>Exercice 2 : Triangle rectangle gauche</h2>
-<p>Ecrire le code afin de produire un triangle rectangle aligné sur la gauche</p>
-<p>Exemple si l'utilisateur saisie le valeur 5</p>
+<main class="page">
+    <section class="hero compact">
+        <p class="eyebrow">Exercice 01</p>
+        <h1>Les boucles</h1>
+        <p class="lead">Utilisation de boucles <code>for</code> imbriquees pour generer des formes et une table de multiplication.</p>
+    </section>
 
-<p>*</br>**</br>***</br>****</br>*****</p>
+    <section class="form-panel">
+        <h2>Choisir une valeur</h2>
+        <form action="#" method="post" class="form-grid">
+            <div class="field">
+                <label for="inputValeur">Nombre d'etoiles</label>
+                <input type="number" id="inputValeur" name="valeur" min="1" max="20" value="<%= cpt %>">
+            </div>
+            <div class="form-actions field full">
+                <button class="button primary" type="submit">Afficher</button>
+                <a class="button secondary" href="index.html">Retour au sommaire</a>
+            </div>
+        </form>
+    </section>
 
-<p>
-<% for (int i = 1; i <= cpt; i++) { %>
-    <% for (int j = 1; j <= i; j++) { %>
-        <%= "*" %>
-    <% } %>
-    <br>
-<% } %>
-</p>
+    <section class="result-grid">
+        <article class="result-card highlight">
+            <span class="tag">Demo</span>
+            <h2>Ligne d'etoiles</h2>
+            <pre class="pattern"><%= ligne.toString() %></pre>
+        </article>
 
+        <article class="result-card">
+            <span class="tag">Exercice 1</span>
+            <h2>Carre d'etoiles</h2>
+            <pre class="pattern"><%= carre.toString() %></pre>
+        </article>
 
+        <article class="result-card">
+            <span class="tag">Exercice 2</span>
+            <h2>Triangle gauche</h2>
+            <pre class="pattern"><%= triangleGauche.toString() %></pre>
+        </article>
 
-<h2>Exercice 3 : Triangle rectangle inversé</h2>
-<p>Ecrire le code afin de produire un triangle rectangle aligné sur la gauche</p>
-<p>Exemple si l'utilisateur saisie le valeur 5</p>
+        <article class="result-card">
+            <span class="tag">Exercice 3</span>
+            <h2>Triangle inverse</h2>
+            <pre class="pattern"><%= triangleInverse.toString() %></pre>
+        </article>
 
-<p>*****</br>****</br>***</br>**</br>*</p>
+        <article class="result-card">
+            <span class="tag">Exercice 4</span>
+            <h2>Triangle droite</h2>
+            <pre class="pattern"><%= triangleDroite.toString() %></pre>
+        </article>
 
-<p>
-<% for (int i = cpt; i >= 1; i--) { %>
-    <% for (int j = 1; j <= i; j++) { %>
-        <%= "*" %>
-    <% } %>
-    <br>
-<% } %>
-</p>
+        <article class="result-card">
+            <span class="tag">Exercice 5</span>
+            <h2>Triangle isocele</h2>
+            <pre class="pattern"><%= triangleIsocele.toString() %></pre>
+        </article>
 
+        <article class="result-card">
+            <span class="tag">Exercice 6</span>
+            <h2>Demi-losange</h2>
+            <pre class="pattern"><%= demiLosange.toString() %></pre>
+        </article>
 
+        <article class="result-card">
+            <span class="tag">Exercice 7</span>
+            <h2>Table de multiplication</h2>
+            <pre class="pattern"><%= table.toString() %></pre>
+        </article>
+    </section>
 
-<h2>Exercice 4 : Triangle rectangle 2</h2>
-<p>Ecrire le code afin de produire un triangle rectangle aligné sur la droite</p>
-<p>Exemple si l'utilisateur saisie le valeur 5</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;***</br>&nbsp;&nbsp;****</br>*****</p>
-
-<% for (int i = 1; i <= cpt; i++) { %>
-  <p style="margin:0; font-family:monospace">
-  <%-- espaces de remplissage --%>
-  <% for (int s = 1; s <= (cpt - i); s++) { %>
-    &nbsp;&nbsp;
-  <% } %>
-  <%-- étoiles --%>
-  <% for (int j = 1; j <= i; j++) { %>
-    <%= "*" %>
-  <% } %>
-  </p>
-<% } %>
-
-
-<h2>Exercice 5 : Triangle isocele</h2>
-<p>Ecrire le code afin de produire un triangle rectangle aligné sur la droite</p>
-<p>Exemple si l'utilisateur saisie le valeur 5</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;***</br>&nbsp;****</br>*****</p>
-
-<% for (int i = 1; i <= cpt; i++) { %>
-  <p style="margin:0; font-family:monospace">
-  <% for (int s = 1; s <= (cpt - i); s++) { %>
-    &nbsp;
-  <% } %>
-  <% for (int j = 1; j <= i; j++) { %>
-    <%= "*" %>
-  <% } %>
-  </p>
-<% } %>
-
-
-
-<h2>Exercice 6 : Le demi losange</h2>
-<p>Ecrire le code afin de produire un losange</p>
-<p>Exemple si l'utilisateur saisie le valeur 5</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;***</br>&nbsp;&nbsp;****</br>*****</p>
-
-<p>*****</br>&nbsp;&nbsp;****</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</p>
-<% for (int i = 1; i <= cpt; i++) { %>
-  <p style="margin:0; font-family:monospace">
-  <% for (int s = 1; s <= (cpt - i); s++) { %>&nbsp;&nbsp;<% } %>
-  <% for (int j = 1; j <= i; j++) { %><%="*"%><% } %>
-  </p>
-<% } %>
-
-
-
-
-<h2>Exercice 7 : La table de multiplication</h2>
-<p>Ecrire le code afin de créser une table de multiplication</p>
-<p>Exemple si l'utilisateur saisie le valeur 5</p>
-<p>5 x 1 = 5</p>
-<p>5 x 2 = 10</p>
-<p>5 x 3 = 15</p>
-<p>5 x 4 = 20</p>
-<p>5 x 5 = 25</p>
-
-<% } %>
-<p><a href="index.html">Retour au sommaire</a></p>
+    <a class="back-link" href="index.html">Retour au sommaire</a>
+</main>
 </body>
 </html>
